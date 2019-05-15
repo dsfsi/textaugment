@@ -35,18 +35,20 @@ The following code downloads default [NLTK part-of-speech tagger](https://www.nl
 ```python
 nltk.download('averaged_perceptron_tagger')
 ```
-Use gensim to load a pre-trained word2vec model
-The model can be downloaded from [here](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
+Use gensim to load a pre-trained word2vec model. Like [Google News from Google drive](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit).
+```python
+import gensim
+model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
+```
+Or training one from scratch using your data or the following public data set:
 
-Or training one from scratch using your data or the following datasets:
+- [Text8 Wiki](http://mattmahoney.net/dc/enwik9.zip)
 
--[Text8 Wiki](http://mattmahoney.net/dc/enwik9.zip)
-
--[Dataset from "One Billion Word Language Modeling Benchmark"](http://www.statmt.org/lm-benchmark/1-billion-word-language-modeling-benchmark-r13output.tar.gz)
+- [Dataset from "One Billion Word Language Modeling Benchmark"](http://www.statmt.org/lm-benchmark/1-billion-word-language-modeling-benchmark-r13output.tar.gz)
 
 ### Installation
 
-Install from pip
+Install from pip [Recommended] 
 ```sh
 $ pip install textaugment
 or install latest release
@@ -78,12 +80,6 @@ from textaugment import Wordnet
 ```python
 from textaugment import Translate
 ```
-- _mixup_ - can be combined with one of the above method. Cite [this paper](https://openreview.net/forum?id=r1Ddp1-Rb) if you use _mixup_.  
-
-```python
-import textaugment
-```
-
 #### Word2vec-based augmentation
 **Basic example**
 ```python
@@ -97,7 +93,7 @@ The films are good
 ```python
 >>> runs = 1 # By default.
 >>> v = False # verbose mode to replace all the words. If enabled runs is not effective. Used in this paper (https://www.cs.cmu.edu/~diyiy/docs/emnlp_wang_2015.pdf)
->>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Uses Geometric distribution to selects words from a sentence.
+>>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Used by Geometric distribution to selects words from a sentence.
 
 >>> t = Word2vec(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
 >>> t.augment('The stories are good')
@@ -120,7 +116,7 @@ In the afternoon, John is walking to town
 >>> v = True # enable verbs augmentation. By default is True.
 >>> n = False # enable nouns augmentation. By default is False.
 >>> runs = 1 # number of times to augment a sentence. By default is 1.
->>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Uses Geometric distribution to selects words from a sentence.
+>>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Used by Geometric distribution to selects words from a sentence.
 
 >>> t = Wordnet(v=False ,n=True, p=0.5)
 >>> t.augment('In the afternoon, John is going to town')
@@ -136,12 +132,12 @@ In the afternoon, Joseph is going to town.
 >>> t.augment('In the afternoon, John is going to town')
 In the afternoon John goes to town
 ```
-## Built With
+## Built with ❤ by
 * [Python](http://python.org/)
 
 ## Authors
-* [Joseph Sefara](https://za.linkedin.com/in/josephsefara) 
-* [Vukosi Marivate](http://www.vima.co.za) 
+* [Joseph Sefara](https://za.linkedin.com/in/josephsefara) (http://www.speechtech.co.za)
+* [Vukosi Marivate](http://www.vima.co.za) (http://www.vima.co.za)
 
 ## Acknowledgements
 Cite this [paper](#) when using this library.
