@@ -2,7 +2,7 @@
 
 TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
 
-by [Joseph Sefara](https://za.linkedin.com/in/josephsefara)  
+by [Joseph Sefara](https://za.linkedin.com/in/josephsefara)  and [Vukosi Marivate](www.vima.co.za) 
 ## Getting Started
 This library uses input string data then output the augmented string data.  
 There are three types of augmentations which can be activated as follows:
@@ -12,7 +12,7 @@ There are three types of augmentations which can be activated as follows:
 * wordnet = True / False
 
 * translate = True / False (This will require internet access)
- 
+
 ### Requirements
 
 * Python 3
