@@ -1,33 +1,55 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-@author: sefaratj@gmail.com
-
-setup.py must be in the root of the project
-"""
-
 import setuptools
+import re
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+
+def find_version(fname):
+    """Attempts to find the version number in the file names fname.
+    Raises RuntimeError if not found.
+    """
+    version = ''
+    with open(fname, 'r') as fp:
+        reg = re.compile(r'__version__ = [\'"]([^\'"]*)[\'"]')
+        for line in fp:
+            m = reg.match(line)
+            if m:
+                version = m.group(1)
+                break
+    if not version:
+        raise RuntimeError('Cannot find version information')
+    return version
+
+
+__version__ = find_version('textaugment/__init__.py')
+
+
+def read(fname):
+    with open(fname, "r") as fh:
+        content = fh.read()
+    return content
+
 
 setuptools.setup(
       name='textaugment',
-      version='1.0',
-      packages=setuptools.find_packages(),
-      #  scripts= ['bin/test_video_pkg.py'],
+      version=__version__,
+      packages=setuptools.find_packages(exclude=('test*', )),
       author='Joseph Sefara',
       author_email='sefaratj@gmail.com',
       license='MIT',
-      keywords=['data augmentation', 'python', 'natural language processing'],
-      url='https://pypi.org/project/textaugment',
+      keywords=['text augmentation', 'python', 'natural language processing','nlp'],
+      url='https://github.com/dsfsi/textaugment',
       description='A library for augmenting text for natural language processing applications.',
-      long_description=long_description,
+      long_description=read("README.md"),
       long_description_content_type="text/markdown",
-      #  Dependences
-      #  install_requires= ['nltk', 'gensim','textblob','numpy','itertools','re'],
+      install_requires= ['nltk', 'gensim','textblob','numpy','googletrans'],
       classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
+          "Intended Audience :: Developers",
+          "Natural Language :: English",
+          "License :: OSI Approved :: MIT License",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: Implementation :: PyPy",
+          "Topic :: Text Processing :: Linguistic",
         ]
 )
