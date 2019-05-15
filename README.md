@@ -7,15 +7,6 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 **[Improving short text classification through global augmentation methods]()** published to MLDM
 
 ## Getting Started
-This library uses input string data then output the augmented string data.  
-There are three types of augmentations which can be activated as follows:
-
-* word2vec = True / False
-
-* wordnet = True / False
-
-* translate = True / False (This will require internet access)
-
 ### Requirements
 
 * Python 3
@@ -53,7 +44,7 @@ Or training one from scratch using your data or the following datasets:
 
 -[Dataset from "One Billion Word Language Modeling Benchmark"](http://www.statmt.org/lm-benchmark/1-billion-word-language-modeling-benchmark-r13output.tar.gz)
 
-### Installing
+### Installation
 
 Install from pip
 ```sh
@@ -69,34 +60,90 @@ $ cd textaugment
 $ python setup.py install
 ```
 
-### How to import the library
+### How to use
+
+There are three types of augmentations which can be used:
+
+- word2vec 
+
+```python
+from textaugment import Word2vec
+```
+
+- wordnet 
+```python
+from textaugment import Wordnet
+```
+- translate (This will require internet access)
+```python
+from textaugment import Translate
+```
+- _mixup_ - can be combined with one of the above method. Cite [this paper](https://openreview.net/forum?id=r1Ddp1-Rb) if you use _mixup_.  
+
 ```python
 import textaugment
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
+#### Word2vec-based augmentation
+**Basic example**
+```python
+>>> from textaugment import Word2vec
+>>> t = Word2vec(model='path/to/gensim/model'or 'gensim model itself')
+>>> t.augment('The stories are good')
+The films are good
 ```
-Give an example
-```
+**Advanced example**
 
+```python
+>>> runs = 1 # By default.
+>>> v = False # verbose mode to replace all the words. If enabled runs is not effective. Used in this paper (https://www.cs.cmu.edu/~diyiy/docs/emnlp_wang_2015.pdf)
+>>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Uses Geometric distribution to selects words from a sentence.
+
+>>> t = Word2vec(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
+>>> t.augment('The stories are good')
+The movies are excellent
+```
+#### WordNet-based augmentation
+**Basic example**
+```python
+>>> import nltk
+>>> nltk.download('punkt')
+>>> nltk.download('wordnet')
+>>> from textaugment import Wordnet
+>>> t = Wordnet()
+>>> t.augment('In the afternoon, John is going to town')
+In the afternoon, John is walking to town
+```
+**Advanced example**
+
+```python
+>>> v = True # enable verbs augmentation. By default is True.
+>>> n = False # enable nouns augmentation. By default is False.
+>>> runs = 1 # number of times to augment a sentence. By default is 1.
+>>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Uses Geometric distribution to selects words from a sentence.
+
+>>> t = Wordnet(v=False ,n=True, p=0.5)
+>>> t.augment('In the afternoon, John is going to town')
+In the afternoon, Joseph is going to town.
+```
+#### RTT-based augmentation
+**Example**
+```python
+>>> src = "en" # source language of the sentence
+>>> to = "fr" # target language
+>>> from textaugment import Translate
+>>> t = Translate(src="en", to="fr")
+>>> t.augment('In the afternoon, John is going to town')
+In the afternoon John goes to town
+```
 ## Built With
-
 * [Python](http://python.org/)
 
 ## Authors
-
 * [Joseph Sefara](https://za.linkedin.com/in/josephsefara) 
 * [Vukosi Marivate](http://www.vima.co.za) 
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
+## Acknowledgements
 Cite this [paper](#) when using this library.
 
 ## Licence
