@@ -123,7 +123,7 @@ class Wordnet:
                 words = [i for i in self.geometric(data=words)]  # List of selected words
                 if len(words) >= 1:  # There are synonyms
                     for word in words:
-                        synonyms1 = wordnet.synsets(word[1], wordnet.NOUN)  # Return verbs only
+                        synonyms1 = wordnet.synsets(word[1], wordnet.NOUN)  # Return nouns only
                         synonyms = list(set(chain.from_iterable([syn.lemma_names() for syn in synonyms1])))
                         synonyms_ = []  # Synonyms with no underscores goes here
                         for w in synonyms:

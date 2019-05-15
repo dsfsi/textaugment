@@ -7,6 +7,7 @@
 # For license information, see LICENSE
 
 import gensim
+import numpy as np
 from random import randrange, choices
 
 
@@ -81,6 +82,20 @@ class Word2vec:
                 print("Error: Model not found. Verify the path.\n")
                 raise
 
+    def geometric(self, data):
+        """
+        Used to generate Geometric distribution.
+
+        :type data: list
+        :param data: Input data
+        :rtype:   ndarray or scalar
+        :return:  Drawn samples from the parameterized Geometric distribution.
+        """
+
+        data = np.array(data)
+        first_trial = np.random.geometric(p=self.p, size=data.shape[0]) == 1  # Capture success after first trial
+        return data[first_trial]
+
     def augment(self, data):
         """
         The method to replace words with similar words.
@@ -109,14 +124,17 @@ class Word2vec:
                         pass  # For words not in the word2vec model
         else:  # Randomly replace some words
             for _ in range(self.runs):
-                random_index = randrange(len(data_tokens))  # Generate pseudo-random numbers upto length of data_tokens
-                try:
-                    similar_words_and_weights = [(syn,t) for syn, t in self.model.wv.most_similar(data_tokens[random_index])]
-                    similar_words = [word for word, t in similar_words_and_weights]
-                    similar_words_weights = [t for word, t in similar_words_and_weights]
-                    word = choices(similar_words,similar_words_weights,k=1) #issue 8
-                    data_tokens[random_index] = word[0].lower()  # Replace with random synonym from 10 synonyms
-                except KeyError:
-                    pass
+                #  random_index = randrange(len(data_tokens))  # Generate pseudo-random numbers upto length of data_tokens
+                data_tokens_idx = [[x, y] for (x, y) in enumerate(data_tokens)]  # Enumerate data
+                words = self.geometric(data=data_tokens_idx).tolist()  # List of words indexed
+                for w in words:
+                    try:
+                        similar_words_and_weights = [(syn,t) for syn, t in self.model.wv.most_similar(w[1])]  # select a word
+                        similar_words = [word for word, t in similar_words_and_weights]
+                        similar_words_weights = [t for word, t in similar_words_and_weights]
+                        word = choices(similar_words,similar_words_weights,k=1)
+                        data_tokens[int(w[0])] = word[0].lower()  # Replace with random synonym from 10 synonyms
+                    except KeyError:
+                        pass
             return " ".join(data_tokens)
         return " ".join(data_tokens)
