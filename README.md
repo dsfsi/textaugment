@@ -14,14 +14,8 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 The following software packages are dependencies and will be installed automatically.
 
 ```shell
-$ pip install nltk
-$ pip install gensim
-$ pip install textblob
-$ pip install googletrans
-$ pip install tools
-$ pip install numpy
-$ pip install itertools
-$ pip install re
+$ pip install numpy nltk gensim textblob googletrans 
+
 ```
 The following code downloads NLTK corpus for [wordnet](http://www.nltk.org/howto/wordnet.html).
 ```python
@@ -40,7 +34,7 @@ Use gensim to load a pre-trained word2vec model. Like [Google News from Google d
 import gensim
 model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
 ```
-Or training one from scratch using your data or the following public data set:
+Or training one from scratch using your data or the following public dataset:
 
 - [Text8 Wiki](http://mattmahoney.net/dc/enwik9.zip)
 
@@ -132,7 +126,7 @@ In the afternoon, Joseph is going to town.
 >>> t.augment('In the afternoon, John is going to town')
 In the afternoon John goes to town
 ```
-## Built with ❤ by
+## Built with ❤ on
 * [Python](http://python.org/)
 
 ## Authors
