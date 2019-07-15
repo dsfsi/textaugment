@@ -1,10 +1,10 @@
-# [TextAugment: Improving short text classification through global augmentation methods]() 
+# [TextAugment: Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752) 
 
 TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
 
 ## Citation Paper
 
-**[Improving short text classification through global augmentation methods]()** published to MLDM
+**[Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752)** published to [MLDM 2019](http://mldm.de)
 
 ![alt text](https://raw.githubusercontent.com/dsfsi/textaugment/master/augment.png "Augmentation methods")
 
@@ -135,7 +135,7 @@ In the afternoon John goes to town
 * [Vukosi Marivate](http://www.vima.co.za) (http://www.vima.co.za)
 
 ## Acknowledgements
-Cite this [paper](#) when using this library.
+Cite this [paper](https://arxiv.org/abs/1907.03752) when using this library.
 
 ## Licence
 MIT licensed. See the bundled [LICENCE](LICENCE) file for more details.
