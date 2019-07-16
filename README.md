@@ -1,10 +1,14 @@
 # [TextAugment: Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752) 
 
+[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/)
+
+## You have just found TextAugment.
+
 TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
 
 ## Citation Paper
 
-**[Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752)** published to [MLDM 2019](http://mldm.de)
+**[Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752)** published to [MLDM 2019](http://mldm.de).
 
 ![alt text](https://raw.githubusercontent.com/dsfsi/textaugment/master/augment.png "Augmentation methods")
 
@@ -137,5 +141,14 @@ In the afternoon John goes to town
 ## Acknowledgements
 Cite this [paper](https://arxiv.org/abs/1907.03752) when using this library.
 
+```
+@article{marivate2019improving,
+  title={Improving short text classification through global augmentation methods},
+  author={Marivate, Vukosi and Sefara, Tshephisho},
+  journal={arXiv preprint arXiv:1907.03752},
+  year={2019}
+}
+```
+
 ## Licence
-MIT licensed. See the bundled [LICENCE](LICENCE) file for more details.
+MIT licensed. See the bundled [LICENCE](https://github.com/dsfsi/textaugment/blob/master/LICENCE) file for more details.
