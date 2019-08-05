@@ -8,7 +8,7 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 
 ## Citation Paper
 
-**[Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752)** published to [MLDM 2019](http://mldm.de).
+**[Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752)**.
 
 ![alt text](https://raw.githubusercontent.com/dsfsi/textaugment/master/augment.png "Augmentation methods")
 
