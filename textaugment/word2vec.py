@@ -109,7 +109,7 @@ class Word2vec:
         # Avoid nulls and other unsupported types
         if type(data) is not str: 
             raise TypeError("Only strings are supported")
-        # Lowecase and split 
+        # Lower case and split
         data_tokens = data.lower().split()
 
         # Verbose = True then replace all the words.
