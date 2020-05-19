@@ -132,7 +132,7 @@ In the afternoon, Joseph is going to town.
 In the afternoon John goes to town
 ```
 # [EDA: Easy data augmentation techniques for boosting performance on text classification tasks](https://www.aclweb.org/anthology/D19-1670.pdf) 
-##This is the implementation of EDA by Jason Wei and Kai Zou. 
+## This is the implementation of EDA by Jason Wei and Kai Zou. 
 #### Synonym Replacement
 Randomly choose *n* words from the sentence that are not stop words. Replace each of these words with
 one of its synonyms chosen at random. 
