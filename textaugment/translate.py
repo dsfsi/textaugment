@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # WordNet-based data augmentation 
 #
-# Copyright (C) 2018
-# Author: Joseph Sefara <sefaratj@gmail.com>
-# URL: <https://bitbucket.org/sefaratj/textaugment/>
+# Copyright (C) 2020
+# Author: Joseph Sefara
+# URL: <https://github.com/dsfsi/textaugment/>
 # For license information, see LICENSE
 
 from .constants import LANGUAGES
@@ -15,7 +15,7 @@ from googletrans import Translator
 class Translate: 
     """
     A set of functions used to augment data.
-    Supported languages are.
+    Supported languages are:
     Language Name	Code
     Afrikaans	af
     Albanian	sq
@@ -82,8 +82,6 @@ class Translate:
     Welsh	cy
     Yiddish	yi
 
-
-
     Example usage: ::
         >>> from textaugment import Translate
         >>> t = Translate(src="en",to="es")
@@ -142,7 +140,8 @@ class Translate:
                 translator = Translator()
                 data = translator.translate(data, dest=self.to, src=self.src).text
                 data = translator.translate(data, dest=self.src, src=self.to).text
-            except Exception as e:
-                print("Error Not translated.\n", e)
+            except Exception:
+                print("Error Not translated.\n")
+                raise
 
         return str(data).lower()
