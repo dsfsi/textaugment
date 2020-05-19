@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # WordNet-based data augmentation 
 #
-# Copyright (C) 2018
-# Author: Joseph Sefara <sefaratj@gmail.com>
-# URL: <https://bitbucket.org/sefaratj/textaugment/>
+# Copyright (C) 2020
+# Author: Joseph Sefara
+# URL: <https://github.com/dsfsi/textaugment/>
 # For license information, see LICENSE
 
 import numpy as np
@@ -14,7 +14,7 @@ from nltk.corpus import wordnet
 
 class Wordnet:
     """
-    A constructer method to initialize variables.
+    A set of functions used to augment data.
 
     Typical usage: ::
         >>> import nltk
