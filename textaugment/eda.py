@@ -14,20 +14,6 @@ from nltk.corpus import wordnet, stopwords
 import random
 
 
-def validate(**kwargs):
-    """Validate input data"""
-
-    if 'p' in kwargs:
-        if kwargs['p'] > 1 or kwargs['p'] < 0:
-            raise TypeError("p must be a fraction between 0 and 1")
-    if 'sentence' in kwargs:
-        if not isinstance(kwargs['sentence'].strip(), str) or len(kwargs['sentence'].strip()) == 0:
-            raise TypeError("sentence must be a valid sentence")
-    if 'n' in kwargs:
-        if not isinstance(kwargs['n'], int):
-            raise TypeError("n must be a valid integer")
-
-
 class EDA:
     """
     This class is an implementation of the original EDA algorithm (2019) [1].
@@ -77,6 +63,20 @@ class EDA:
         new_words[random_idx_1], new_words[random_idx_2] = new_words[random_idx_2], new_words[random_idx_1]
         return new_words
 
+    @staticmethod
+    def validate(**kwargs):
+        """Validate input data"""
+
+        if 'p' in kwargs:
+            if kwargs['p'] > 1 or kwargs['p'] < 0:
+                raise TypeError("p must be a fraction between 0 and 1")
+        if 'sentence' in kwargs:
+            if not isinstance(kwargs['sentence'].strip(), str) or len(kwargs['sentence'].strip()) == 0:
+                raise TypeError("sentence must be a valid sentence")
+        if 'n' in kwargs:
+            if not isinstance(kwargs['n'], int):
+                raise TypeError("n must be a valid integer")
+
     def __init__(self, stop_words=None, random_state=1):
         """A method to initialize parameters
 
@@ -100,7 +100,8 @@ class EDA:
         synonyms = list()
         counter = 0
         while len(synonyms) < 1:
-            random_word = new_words[random.randint(0, len(new_words) - 1)]
+            random_word_list = list([word for word in new_words if word not in self.stopwords])
+            random_word = random_word_list[random.randint(0, len(random_word_list) - 1)]
             synonyms = self._get_synonyms(random_word)
             counter += 1
             if counter >= 10:
@@ -121,7 +122,7 @@ class EDA:
         :rtype:   str
         :return:  Augmented sentence
         """
-        validate(sentence=sentence, n=n)
+        self.validate(sentence=sentence, n=n)
         self.n = n
         self.sentence = sentence
         words = sentence.split()
@@ -152,7 +153,7 @@ class EDA:
         :rtype:   str
         :return:  Augmented sentence
         """
-        validate(sentence=sentence, p=p)
+        self.validate(sentence=sentence, p=p)
         self.p = p
         self.sentence = sentence
         words = sentence.split()
@@ -180,7 +181,7 @@ class EDA:
         :rtype:   str
         :return:  Augmented sentence
         """
-        validate(sentence=sentence, n=n)
+        self.validate(sentence=sentence, n=n)
         self.n = n
         self.sentence = sentence
         words = sentence.split()
@@ -200,7 +201,7 @@ class EDA:
         :rtype:   str
         :return:  Augmented sentence
         """
-        validate(sentence=sentence, n=n)
+        self.validate(sentence=sentence, n=n)
         self.n = n
         self.sentence = sentence
         words = sentence.split()
