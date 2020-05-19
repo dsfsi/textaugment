@@ -131,6 +131,53 @@ In the afternoon, Joseph is going to town.
 >>> t.augment('In the afternoon, John is going to town')
 In the afternoon John goes to town
 ```
+# [EDA: Easy data augmentation techniques for boosting performance on text classification tasks](https://www.aclweb.org/anthology/D19-1670.pdf) 
+##This is the implementation of EDA by Jason Wei and Kai Zou. 
+#### Synonym Replacement
+Randomly choose *n* words from the sentence that are not stop words. Replace each of these words with
+one of its synonyms chosen at random. 
+
+**Basic example**
+```python
+>>> from textaugment import EDA
+>>> t = EDA()
+>>> t.synonym_replacement("John is going to town")
+John is give out to town
+```
+
+#### Random Deletion
+Randomly remove each word in the sentence with probability *p*.
+
+**Basic example**
+```python
+>>> from textaugment import EDA
+>>> t = EDA()
+>>> t.random_deletion("John is going to town", p=0.2)
+is going to town
+```
+
+#### Random Swap
+Randomly choose two words in the sentence and swap their positions. Do this n times.
+
+**Basic example**
+```python
+>>> from textaugment import EDA
+>>> t = EDA()
+>>> t.random_swap("John is going to town")
+John town going to is
+```
+
+#### Random Insertion 
+Find a random synonym of a random word in the sentence that is not a stop word. Insert that synonym into a random position in the sentence. Do this n times
+
+**Basic example**
+```python
+>>> from textaugment import EDA
+>>> t = EDA()
+>>> t.random_insertion("John is going to town")
+John is going to make up town
+```
+
 ## Built with ❤ on
 * [Python](http://python.org/)
 
