@@ -1,14 +1,25 @@
+
+
 # [TextAugment: Improving Short Text Classification through Global Augmentation Methods](https://arxiv.org/abs/1907.03752) 
 
-[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/)
+[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/)[![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/)
 
 ## You have just found TextAugment.
 
 TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
 
+## Features
+
+- Generate synthetic data for improving model performance without manual effort
+- Simple, lightweight, easy-to-use library.
+- Plug and play to any machine learning frameworks (e.g. PyTorch, TensorFlow, Scikit-learn)
+- Support textual data
+
 ## Citation Paper
 
 **[Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752)**.
+
+
 
 ![alt text](https://raw.githubusercontent.com/dsfsi/textaugment/master/augment.png "Augmentation methods")
 
