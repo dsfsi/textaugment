@@ -20,6 +20,7 @@ class Wordnet:
         >>> import nltk
         >>> nltk.download('punkt')
         >>> nltk.download('wordnet')
+        >>> nltk.download('averaged_perceptron_tagger')
         >>> from textaugment import Wordnet
         >>> t = Wordnet(v=True,n=True,p=0.5)
         >>> t.augment('I love school')
