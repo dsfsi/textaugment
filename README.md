@@ -2,11 +2,26 @@
 
 # [TextAugment: Improving Short Text Classification through Global Augmentation Methods](https://arxiv.org/abs/1907.03752) 
 
-[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/) [![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/)
+[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/) [![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/) [![arxiv](https://img.shields.io/badge/cs.CL-arXiv%3A1907.03752-B31B1B.svg)](https://arxiv.org/abs/1907.03752)
 
 ## You have just found TextAugment.
 
 TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
+
+# Table of Contents
+
+- [Features](#Features)
+- [Citation Paper](#citation-paper) 
+	- [Requirements](#Requirements)
+	- [Installation](#Installation)
+	- [How to use](#How-to-use)
+		- [Word2vec-based augmentation](#Word2vec-based-augmentation)
+		- [WordNet-based augmentation](#WordNet-based-augmentation)
+		- [RTT-based augmentation](#RTT-based-augmentation)
+- [Easy data augmentation (EDA)](#eda-easy-data-augmentation-techniques-for-boosting-performance-on-text-classification-tasks)
+- [Mixup augmentation](#mixup-augmentation)
+  - [Implementation](#Implementation)
+- [Acknowledgements](#Acknowledgements)
 
 ## Features
 
@@ -91,7 +106,11 @@ from textaugment import Wordnet
 from textaugment import Translate
 ```
 #### Word2vec-based augmentation
+
+[See this notebook for an example](https://github.com/dsfsi/textaugment/blob/master/examples/word2vec_example.ipynb)
+
 **Basic example**
+
 ```python
 >>> from textaugment import Word2vec
 >>> t = Word2vec(model='path/to/gensim/model'or 'gensim model itself')
@@ -142,8 +161,13 @@ In the afternoon, Joseph is going to town.
 >>> t.augment('In the afternoon, John is going to town')
 In the afternoon John goes to town
 ```
-# [EDA: Easy data augmentation techniques for boosting performance on text classification tasks](https://www.aclweb.org/anthology/D19-1670.pdf) 
+# EDA: Easy data augmentation techniques for boosting performance on text classification tasks 
 ## This is the implementation of EDA by Jason Wei and Kai Zou. 
+
+https://www.aclweb.org/anthology/D19-1670.pdf
+
+[See this notebook for an example](https://github.com/dsfsi/textaugment/blob/master/examples/eda_example.ipynb)
+
 #### Synonym Replacement
 Randomly choose *n* words from the sentence that are not stop words. Replace each of these words with
 one of its synonyms chosen at random. 
@@ -188,6 +212,18 @@ Find a random synonym of a random word in the sentence that is not a stop word. 
 >>> t.random_insertion("John is going to town")
 John is going to make up town
 ```
+
+# Mixup augmentation
+
+This is the implementation of mixup augmentation by [Hongyi Zhang, Moustapha Cisse, Yann Dauphin, David Lopez-Paz](https://openreview.net/forum?id=r1Ddp1-Rb) adapted to NLP. 
+
+Used in [Augmenting Data with Mixup for Sentence Classification: An Empirical Study](https://arxiv.org/abs/1905.08941). 
+
+Mixup is a generic and straightforward data augmentation principle. In essence, mixup trains a neural network on convex combinations of pairs of examples and their labels. By doing so, mixup regularises the neural network to favour simple linear behaviour in-between training examples. 
+
+## Implementation
+
+[See this notebook for an example](https://github.com/dsfsi/textaugment/blob/master/examples/mixup_example_using_IMDB_sentiment.ipynb)
 
 ## Built with ❤ on
 * [Python](http://python.org/)
