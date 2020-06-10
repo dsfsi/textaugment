@@ -31,6 +31,8 @@ class Wordnet:
         """
         A method to initialize parameters
 
+        :type random_state: int
+        :param random_state: seed
         :type v: bool
         :param v: Verb, default is True
         :type n: bool
@@ -42,6 +44,15 @@ class Wordnet:
         :rtype:   None
         :return:  Constructer do not return.
         """
+
+        # Set random state
+        if 'random_state' in kwargs:
+            self.random_state = kwargs['random_state']
+            if isinstance(self.random_state, int):
+                np.random.seed(self.random_state)
+            else:
+                raise TypeError("random_state must have type int, float, str, bytes, or bytearray")
+
         # Set verb to be default if no values given
         try:
             if "v" not in kwargs and "n" not in kwargs:

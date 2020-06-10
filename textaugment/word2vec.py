@@ -8,7 +8,7 @@
 
 import gensim
 import numpy as np
-from random import randrange, choices
+import random
 
 
 class Word2vec:
@@ -25,7 +25,8 @@ class Word2vec:
     def __init__(self, **kwargs):
         """
         A method to initialize a model on a given path.
-
+        :type random_state: int, float, str, bytes, bytearray
+        :param random_state: seed
         :type model: str or gensim.models.word2vec.Word2Vec
         :param model: The path to the model or the model itself.
         :type runs: int, optional
@@ -36,6 +37,15 @@ class Word2vec:
         :type p: float, optional
         :param p: The probability of success of an individual trial. (0.1<p<1.0), default is 0.5
         """
+
+        # Set random state
+        if 'random_state' in kwargs:
+            self.random_state = kwargs['random_state']
+            if isinstance(self.random_state, int):
+                random.seed(self.random_state)
+                np.random.seed(self.random_state)
+            else:
+                raise TypeError("random_state must have type int")
 
         # Set verbose to false if does not exists
         try:
@@ -65,9 +75,12 @@ class Word2vec:
                 raise TypeError("DataType for 'runs' must be an integer")
             if "model" not in kwargs:
                 raise ValueError("Set the value of model. e.g model='path/to/model' or model itself")
-            if type(kwargs['model']) not in [str, gensim.models.word2vec.Word2Vec, gensim.models.keyedvectors.Word2VecKeyedVectors]:
+            if type(kwargs['model']) not in [str,
+                                             gensim.models.word2vec.Word2Vec,
+                                             gensim.models.keyedvectors.Word2VecKeyedVectors]:
                 raise TypeError("Model path must be a string. "
-                                "Or type of model must be a gensim.models.word2vec.Word2Vec or gensim.models.keyedvectors.Word2VecKeyedVectors type. "
+                                "Or type of model must be a gensim.models.word2vec.Word2Vec or "
+                                "gensim.models.keyedvectors.Word2VecKeyedVectors type. "
                                 "To load a model use gensim.models.Word2Vec.load('path')")
         except (ValueError, TypeError):
             raise
@@ -118,21 +131,20 @@ class Word2vec:
                 for index in range(len(data_tokens)):  # Index from 0 to length of data_tokens
                     try:
                         similar_words = [syn for syn, t in self.model.wv.most_similar(data_tokens[index])]
-                        r = randrange(len(similar_words))
+                        r = random.randrange(len(similar_words))
                         data_tokens[index] = similar_words[r].lower()  # Replace with random synonym from 10 synonyms
                     except KeyError:
                         pass  # For words not in the word2vec model
         else:  # Randomly replace some words
             for _ in range(self.runs):
-                #  random_index = randrange(len(data_tokens))  # Generate pseudo-random numbers upto length of data_tokens
                 data_tokens_idx = [[x, y] for (x, y) in enumerate(data_tokens)]  # Enumerate data
                 words = self.geometric(data=data_tokens_idx).tolist()  # List of words indexed
                 for w in words:
                     try:
-                        similar_words_and_weights = [(syn,t) for syn, t in self.model.wv.most_similar(w[1])]  # select a word
+                        similar_words_and_weights = [(syn, t) for syn, t in self.model.wv.most_similar(w[1])]
                         similar_words = [word for word, t in similar_words_and_weights]
                         similar_words_weights = [t for word, t in similar_words_and_weights]
-                        word = choices(similar_words,similar_words_weights,k=1)
+                        word = random.choices(similar_words, similar_words_weights, k=1)
                         data_tokens[int(w[0])] = word[0].lower()  # Replace with random synonym from 10 synonyms
                     except KeyError:
                         pass

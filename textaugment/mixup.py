@@ -46,7 +46,11 @@ class MIXUP:
     def __init__(self, random_state=1, runs=1):
         self.random_state = random_state
         self.runs = runs
-        random.seed(self.random_state)
+        if isinstance(self.random_state, int):
+            random.seed(self.random_state)
+            np.random.seed(self.random_state)
+        else:
+            raise TypeError("random_state must have type int")
 
     def mixup_data(self, x, y=None, alpha=0.2):
         """This method performs mixup. If runs = 1 it just does 1 mixup with whole batch, any n of runs

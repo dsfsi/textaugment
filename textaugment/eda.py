@@ -89,11 +89,14 @@ class EDA:
         :return:  Constructer do not return.
         """
         self.stopwords = stopwords.words('english') if stop_words is None else stop_words
-        self.random_state = random_state
-        random.seed(random_state)
         self.sentence = None
         self.p = None
         self.n = None
+        self.random_state = random_state
+        if isinstance(self.random_state, int):
+            random.seed(self.random_state)
+        else:
+            raise TypeError("random_state must have type int")
 
     def add_word(self, new_words):
         """Insert word"""

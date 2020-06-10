@@ -8,7 +8,7 @@ from .constants import LANGUAGES
 
 name = "textaugment"
 
-__version__ = '1.3'
+__version__ = '1.3.1'
 __licence__ = 'MIT'
 __author__ = 'Joseph Sefara'
 __url__ = 'https://github.com/dsfsi/textaugment/'
