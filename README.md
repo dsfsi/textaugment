@@ -2,7 +2,7 @@
 
 # [TextAugment: Improving Short Text Classification through Global Augmentation Methods](https://arxiv.org/abs/1907.03752) 
 
-[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/) [![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/) [![arxiv](https://img.shields.io/badge/cs.CL-arXiv%3A1907.03752-B31B1B.svg)](https://arxiv.org/abs/1907.03752)
+[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/) [![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/)[![LNCS](https://img.shields.io/badge/LNCS-10.1007%2F978-3-030-57321-8_21-B31B1B.svg)](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21) [![arxiv](https://img.shields.io/badge/cs.CL-arXiv%3A1907.03752-B31B1B.svg)](https://arxiv.org/abs/1907.03752)
 
 ## You have just found TextAugment.
 
@@ -233,14 +233,14 @@ Mixup is a generic and straightforward data augmentation principle. In essence, 
 * [Vukosi Marivate](http://www.vima.co.za) (http://www.vima.co.za)
 
 ## Acknowledgements
-Cite this [paper](https://arxiv.org/abs/1907.03752) when using this library.
+Cite this [paper](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21) when using this library. [Arxiv Version](https://arxiv.org/abs/1907.03752)
 
 ```
-@article{marivate2019improving,
+@article{marivate2020improving,
   title={Improving short text classification through global augmentation methods},
   author={Marivate, Vukosi and Sefara, Tshephisho},
-  journal={arXiv preprint arXiv:1907.03752},
-  year={2019}
+  journal={Machine Learning and Knowledge Extraction. CD-MAKE 2020. Lecture Notes in Computer Science},
+  year={2020}
 }
 ```
 
