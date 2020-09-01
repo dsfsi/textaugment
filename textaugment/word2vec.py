@@ -77,10 +77,12 @@ class Word2vec:
                 raise ValueError("Set the value of model. e.g model='path/to/model' or model itself")
             if type(kwargs['model']) not in [str,
                                              gensim.models.word2vec.Word2Vec,
-                                             gensim.models.keyedvectors.Word2VecKeyedVectors]:
+                                             gensim.models.keyedvectors.Word2VecKeyedVectors,
+                                            gensim.models.keyedvectors.FastTextKeyedVectors]:
                 raise TypeError("Model path must be a string. "
                                 "Or type of model must be a gensim.models.word2vec.Word2Vec or "
-                                "gensim.models.keyedvectors.Word2VecKeyedVectors type. "
+                                "gensim.models.keyedvectors.Word2VecKeyedVectors or "
+                                "gensim.models.keyedvectors.FastTextKeyedVectors type. "
                                 "To load a model use gensim.models.Word2Vec.load('path')")
         except (ValueError, TypeError):
             raise
