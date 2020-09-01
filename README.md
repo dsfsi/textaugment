@@ -65,6 +65,12 @@ Use gensim to load a pre-trained word2vec model. Like [Google News from Google d
 import gensim
 model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
 ```
+You can also use gensim to load Facebook's Fasttext [English](https://fasttext.cc/docs/en/english-vectors.html) and [Multilingual models](https://fasttext.cc/docs/en/crawl-vectors.html)
+```
+import gensim
+model = gensim.models.fasttext.load_facebook_model('./cc.en.300.bin.gz')
+```
+
 Or training one from scratch using your data or the following public dataset:
 
 - [Text8 Wiki](http://mattmahoney.net/dc/enwik9.zip)
