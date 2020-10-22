@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 # TextAugment: mixup
 #
 # Copyright (C) 2018-2020

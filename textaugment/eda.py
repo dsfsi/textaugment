@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 # TextAugment: EDA
 #
 # Copyright (C) 2018-2020
@@ -108,7 +108,7 @@ class EDA:
             synonyms = self._get_synonyms(random_word)
             counter += 1
             if counter >= 10:
-                return
+                return new_words
         random_synonym = synonyms[0]  # TODO
         random_idx = random.randint(0, len(new_words) - 1)
         new_words.insert(random_idx, random_synonym)
