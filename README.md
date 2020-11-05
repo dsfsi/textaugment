@@ -2,7 +2,7 @@
 
 # [TextAugment: Improving Short Text Classification through Global Augmentation Methods](https://arxiv.org/abs/1907.03752) 
 
-[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/) [![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/)[![LNCS](https://img.shields.io/badge/LNCS-Book%20Chapter-B31B1B.svg)](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21) [![arxiv](https://img.shields.io/badge/cs.CL-arXiv%3A1907.03752-B31B1B.svg)](https://arxiv.org/abs/1907.03752)
+[![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/) [![TotalDownloads](https://pepy.tech/badge/textaugment)](https://pypi.org/project/textaugment/) [![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/) [![LNCS](https://img.shields.io/badge/LNCS-Book%20Chapter-B31B1B.svg)](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21) [![arxiv](https://img.shields.io/badge/cs.CL-arXiv%3A1907.03752-B31B1B.svg)](https://arxiv.org/abs/1907.03752)
 
 ## You have just found TextAugment.
 
@@ -32,7 +32,7 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 
 ## Citation Paper
 
-**[Improving short text classification through global augmentation methods](https://arxiv.org/abs/1907.03752)**.
+**[Improving short text classification through global augmentation methods](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21)**.
 
 
 
@@ -242,11 +242,13 @@ Mixup is a generic and straightforward data augmentation principle. In essence, 
 Cite this [paper](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21) when using this library. [Arxiv Version](https://arxiv.org/abs/1907.03752)
 
 ```
-@article{marivate2020improving,
+@inproceedings{marivate2020improving,
   title={Improving short text classification through global augmentation methods},
   author={Marivate, Vukosi and Sefara, Tshephisho},
-  journal={Machine Learning and Knowledge Extraction. CD-MAKE 2020. Lecture Notes in Computer Science},
-  year={2020}
+  booktitle={International Cross-Domain Conference for Machine Learning and Knowledge Extraction},
+  pages={385--399},
+  year={2020},
+  organization={Springer}
 }
 ```
 
