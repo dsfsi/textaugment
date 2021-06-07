@@ -122,7 +122,24 @@ class EDA:
                                   stopwords: list = None,
                                   lang: str = 'eng'):
 
-        stop_words = stopwords if stopwords else self.stopwords
+        """Replace n words in the sentence with synonyms from wordnet
+
+        :type sentence: str
+        :param sentence: Sentence
+        :type n: int
+        :param n: Number of repetitions to replace
+        :type top_n: int
+        :param top_n: TOP_N of SYNONYMS
+        :type stopwords: list
+        :param stopwords: stopwords
+        :type lang: str
+        :param lang: lang
+
+        :rtype:   str
+        :return:  Augmented sentence
+        """
+
+        stopwords = stopwords if stopwords else self.stopwords
 
         def get_synonyms(w, pos):
             morphy_tag = {
@@ -146,7 +163,7 @@ class EDA:
                 "word": word,
                 "new_word": random.choice(synonyms) if len(synonyms) > 0 else "",
                 "synonyms": synonyms,
-                "in_stopwords": word in stop_words
+                "in_stopwords": word in stopwords
             })
 
         replaced_index = random.choices([word["index"] for word in new_words
@@ -154,15 +171,13 @@ class EDA:
 
         return ' '.join([word["new_word" if word["index"] in replaced_index else "word"] for word in new_words])
 
-    def synonym_replacement(self, sentence: str, n: int = 1, top_n=None):
+    def synonym_replacement(self, sentence: str, n: int = 1):
         """Replace n words in the sentence with synonyms from wordnet
 
         :type sentence: str
         :param sentence: Sentence
         :type n: int
         :param n: Number of repetitions to replace
-        :type top_n: int
-        :param top_n: TOP_N of SYNONYMS
 
         :rtype:   str
         :return:  Augmented sentence
