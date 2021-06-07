@@ -114,13 +114,15 @@ class EDA:
         new_words.insert(random_idx, random_synonym)
         return new_words
 
-    def synonym_replacement(self, sentence: str, n: int = 1):
+    def synonym_replacement(self, sentence: str, n: int = 1, top_n=None):
         """Replace n words in the sentence with synonyms from wordnet
 
         :type sentence: str
         :param sentence: Sentence
         :type n: int
         :param n: Number of repetitions to replace
+        :type top_n: int
+        :param top_n: TOP_N of SYNONYMS
 
         :rtype:   str
         :return:  Augmented sentence
@@ -136,6 +138,7 @@ class EDA:
         for random_word in random_word_list:
             synonyms = self._get_synonyms(random_word)
             if len(synonyms) > 0:
+                synonyms = synonyms[:top_n if top_n else len(synonyms)]
                 synonym = random.choice(list(synonyms))
                 new_words = [synonym if word == random_word else word for word in new_words]
                 replaced += 1
