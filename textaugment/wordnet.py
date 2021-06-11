@@ -100,7 +100,7 @@ class Wordnet:
         first_trial = np.random.geometric(p=self.p, size=data.shape[0]) == 1  # Capture success after first trial
         return data[first_trial]
 
-    def replace(self, data):
+    def replace(self, data, lang):
         """
         The method to replace words with synonyms
         
@@ -108,7 +108,8 @@ class Wordnet:
         :param data: sentence used for data augmentation
         :rtype:   str
         :return:  The augmented data
-
+        :type lang: str
+        :param lang: choose lang
         """
         data = data.lower().split()
         data_tokens = [[i, x, y] for i, (x, y) in enumerate(nltk.pos_tag(data))]  # Convert tuple to list
@@ -118,8 +119,8 @@ class Wordnet:
                 words = [i for i in self.geometric(data=words)]  # List of selected words
                 if len(words) >= 1:  # There are synonyms
                     for word in words:
-                        synonyms1 = wordnet.synsets(word[1], wordnet.VERB)  # Return verbs only
-                        synonyms = list(set(chain.from_iterable([syn.lemma_names() for syn in synonyms1])))
+                        synonyms1 = wordnet.synsets(word[1], wordnet.VERB, lang=lang)  # Return verbs only
+                        synonyms = list(set(chain.from_iterable([syn.lemma_names(lang=lang) for syn in synonyms1])))
                         synonyms_ = []  # Synonyms with no underscores goes here
                         for w in synonyms:
                             if '_' not in w:
@@ -135,8 +136,8 @@ class Wordnet:
                 words = [i for i in self.geometric(data=words)]  # List of selected words
                 if len(words) >= 1:  # There are synonyms
                     for word in words:
-                        synonyms1 = wordnet.synsets(word[1], wordnet.NOUN)  # Return nouns only
-                        synonyms = list(set(chain.from_iterable([syn.lemma_names() for syn in synonyms1])))
+                        synonyms1 = wordnet.synsets(word[1], wordnet.NOUN, lang=lang)  # Return nouns only
+                        synonyms = list(set(chain.from_iterable([syn.lemma_names(lang=lang) for syn in synonyms1])))
                         synonyms_ = []  # Synonyms with no underscores goes here
                         for w in synonyms:
                             if '_' not in w:
@@ -148,7 +149,7 @@ class Wordnet:
 
         return " ".join(data)
 
-    def augment(self, data):
+    def augment(self, data, lang="eng"):
         """
         Data augmentation for text. Generate new dataset based on verb/nouns synonyms.
         
@@ -156,9 +157,11 @@ class Wordnet:
         :param data: sentence used for data augmentation 
         :rtype:   str
         :return:  The augmented data
+        :type lang: str
+        :param lang: choose lang
         """
         # Error handling
         if type(data) is not str:
             raise TypeError("Only strings are supported")
-        data = self.replace(data)
+        data = self.replace(data, lang)
         return data 
