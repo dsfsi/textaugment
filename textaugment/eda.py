@@ -10,6 +10,7 @@
 """
 This module is an implementation of the original EDA algorithm (2019) [1].
 """
+import nltk
 from nltk.corpus import wordnet, stopwords
 import random
 
@@ -113,6 +114,62 @@ class EDA:
         random_idx = random.randint(0, len(new_words) - 1)
         new_words.insert(random_idx, random_synonym)
         return new_words
+
+    def synonym_replacement_top_n(self,
+                                  sentence: str,
+                                  n: int = 1,
+                                  top_n: int = None,
+                                  stopwords: list = None,
+                                  lang: str = 'eng'):
+
+        """Replace n words in the sentence with synonyms from wordnet
+
+        :type sentence: str
+        :param sentence: Sentence
+        :type n: int
+        :param n: Number of repetitions to replace
+        :type top_n: int
+        :param top_n: TOP_N of SYNONYMS
+        :type stopwords: list
+        :param stopwords: stopwords
+        :type lang: str
+        :param lang: lang
+
+        :rtype:   str
+        :return:  Augmented sentence
+        """
+
+        stopwords = stopwords if stopwords else self.stopwords
+
+        def get_synonyms(w, pos):
+            morphy_tag = {
+                'NN': wordnet.NOUN,
+                'JJ': wordnet.ADJ,
+                'VB': wordnet.VERB,
+                'RB': wordnet.ADV
+            }
+            for sunset in wordnet.synsets(w,
+                                          lang=lang,
+                                          pos=morphy_tag[pos[:2]] if pos[:2] in morphy_tag else None):
+                for lemma in sunset.lemmas(lang=lang):
+                    yield lemma.name()
+
+        new_words = list()
+        for index, (word, tag) in enumerate(nltk.pos_tag(nltk.word_tokenize(sentence))):
+            synonyms = sorted(set(synonym for synonym in get_synonyms(word, tag) if synonym != word))
+            synonyms = synonyms[:top_n if top_n else len(synonyms)]
+            new_words.append({
+                "index": index,
+                "word": word,
+                "new_word": random.choice(synonyms) if len(synonyms) > 0 else "",
+                "synonyms": synonyms,
+                "in_stopwords": word in stopwords
+            })
+
+        replaced_index = random.choices([word["index"] for word in new_words
+                                         if not word["in_stopwords"] and len(word["synonyms"]) > 0], k=n)
+
+        return ' '.join([word["new_word" if word["index"] in replaced_index else "word"] for word in new_words])
 
     def synonym_replacement(self, sentence: str, n: int = 1):
         """Replace n words in the sentence with synonyms from wordnet
