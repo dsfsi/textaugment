@@ -48,7 +48,7 @@ class EDA:
                 synonyms.add(synonym)
         if word in synonyms:
             synonyms.remove(word)
-        return list(synonyms)
+        return sorted(synonyms)
 
     @staticmethod
     def swap_word(new_words):
@@ -187,7 +187,7 @@ class EDA:
         self.sentence = sentence
         words = sentence.split()
         new_words = words.copy()
-        random_word_list = list(set([word for word in words if word not in self.stopwords]))
+        random_word_list = sorted(set([word for word in words if word not in self.stopwords]))
         random.shuffle(random_word_list)
         replaced = 0
         for random_word in random_word_list:
