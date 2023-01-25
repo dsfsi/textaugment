@@ -48,7 +48,10 @@ class EDA:
                 synonyms.add(synonym)
         if word in synonyms:
             synonyms.remove(word)
-        return random.shuffle(sorted(synonyms))
+        synonyms = sorted(list(synonyms))
+        random.shuffle(synonyms)
+        return synonyms
+
 
     @staticmethod
     def swap_word(new_words):
