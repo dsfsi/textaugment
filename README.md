@@ -6,7 +6,7 @@
 
 ## You have just found TextAugment.
 
-TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
+TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim v3.x](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
 
 # Table of Contents
 
@@ -45,7 +45,7 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 The following software packages are dependencies and will be installed automatically.
 
 ```shell
-$ pip install numpy nltk gensim textblob googletrans 
+$ pip install numpy nltk gensim==3.8.3 textblob googletrans 
 
 ```
 The following code downloads NLTK corpus for [wordnet](http://www.nltk.org/howto/wordnet.html).
