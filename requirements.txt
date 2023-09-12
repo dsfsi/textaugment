@@ -9,7 +9,7 @@ gensim==3.8.3
 googletrans==2.4.0
 idna==2.9
 jmespath==0.10.0
-joblib==0.15.1
+joblib==1.2.0
 nltk==3.5
 numpy==1.18.4
 python-dateutil==2.8.1
