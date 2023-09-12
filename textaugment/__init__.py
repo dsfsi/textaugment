@@ -3,6 +3,7 @@ from .translate import Translate
 from .word2vec import Word2vec
 from .wordnet import Wordnet
 from .eda import EDA
+from .aeda import AEDA
 from .mixup import MIXUP
 from .constants import LANGUAGES
 
@@ -20,6 +21,7 @@ __all__ = [
     'Word2vec',
     'Wordnet',
     'EDA',
+    'AEDA',
     'MIXUP',
     'LANGUAGES'
 ]

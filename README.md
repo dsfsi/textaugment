@@ -19,6 +19,7 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 		- [WordNet-based augmentation](#WordNet-based-augmentation)
 		- [RTT-based augmentation](#RTT-based-augmentation)
 - [Easy data augmentation (EDA)](#eda-easy-data-augmentation-techniques-for-boosting-performance-on-text-classification-tasks)
+- [An easier data augmentation (AEDA)](#aeda-an-easier-data-augmentation-technique-for-text-classification)
 - [Mixup augmentation](#mixup-augmentation)
   - [Implementation](#Implementation)
 - [Acknowledgements](#Acknowledgements)
@@ -217,6 +218,25 @@ Find a random synonym of a random word in the sentence that is not a stop word. 
 >>> t = EDA()
 >>> t.random_insertion("John is going to town")
 John is going to make up town
+```
+
+# AEDA: An easier data augmentation technique for text classification
+
+This is the implementation of AEDA by Karimi et al, a variant of EDA. It is based on the random insertion of punctuation marks.
+
+https://aclanthology.org/2021.findings-emnlp.234.pdf
+
+## Implementation
+[See this notebook for an example](https://github.com/dsfsi/textaugment/blob/master/examples/eda_example.ipynb)
+
+#### Random Insertion of Punctuation Marks
+
+**Basic example**
+```python
+>>> from textaugment import AEDA
+>>> t = AEDA()
+>>> t.punct_insertion("John is going to town")
+! John is going to town
 ```
 
 # Mixup augmentation
