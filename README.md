@@ -64,7 +64,7 @@ nltk.download('averaged_perceptron_tagger')
 Use gensim to load a pre-trained word2vec model. Like [Google News from Google drive](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit).
 ```python
 import gensim
-model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
+model = gensim.models.KeyedVectors.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
 ```
 You can also use gensim to load Facebook's Fasttext [English](https://fasttext.cc/docs/en/english-vectors.html) and [Multilingual models](https://fasttext.cc/docs/en/crawl-vectors.html)
 ```
@@ -103,6 +103,11 @@ There are three types of augmentations which can be used:
 ```python
 from textaugment import Word2vec
 ```
+- fasttext 
+
+```python
+from textaugment import Fasttext
+```
 
 - wordnet 
 ```python
@@ -112,15 +117,18 @@ from textaugment import Wordnet
 ```python
 from textaugment import Translate
 ```
-#### Word2vec-based augmentation
+#### Fasttext/Word2vec-based augmentation
 
 [See this notebook for an example](https://github.com/dsfsi/textaugment/blob/master/examples/word2vec_example.ipynb)
 
 **Basic example**
 
 ```python
->>> from textaugment import Word2vec
+>>> from textaugment import Word2vec, Fasttext
 >>> t = Word2vec(model='path/to/gensim/model'or 'gensim model itself')
+>>> t.augment('The stories are good')
+The films are good
+>>> t = Fasttext(model='path/to/gensim/model'or 'gensim model itself')
 >>> t.augment('The stories are good')
 The films are good
 ```
@@ -131,8 +139,11 @@ The films are good
 >>> v = False # verbose mode to replace all the words. If enabled runs is not effective. Used in this paper (https://www.cs.cmu.edu/~diyiy/docs/emnlp_wang_2015.pdf)
 >>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Used by Geometric distribution to selects words from a sentence.
 
->>> t = Word2vec(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
->>> t.augment('The stories are good')
+>>> word = Word2vec(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
+>>> word.augment('The stories are good', top_n=10)
+The movies are excellent
+>>> fast = Fasttext(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
+>>> fast.augment('The stories are good', top_n=10)
 The movies are excellent
 ```
 #### WordNet-based augmentation
@@ -155,7 +166,7 @@ In the afternoon, John is walking to town
 >>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Used by Geometric distribution to selects words from a sentence.
 
 >>> t = Wordnet(v=False ,n=True, p=0.5)
->>> t.augment('In the afternoon, John is going to town')
+>>> t.augment('In the afternoon, John is going to town', top_n=10)
 In the afternoon, Joseph is going to town.
 ```
 #### RTT-based augmentation
@@ -183,7 +194,7 @@ one of its synonyms chosen at random.
 ```python
 >>> from textaugment import EDA
 >>> t = EDA()
->>> t.synonym_replacement("John is going to town")
+>>> t.synonym_replacement("John is going to town", top_n=10)
 John is give out to town
 ```
 
