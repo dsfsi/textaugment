@@ -42,7 +42,7 @@ setuptools.setup(
       description='A library for augmenting text for natural language processing applications.',
       long_description=read("README.md"),
       long_description_content_type="text/markdown",
-      install_requires=['nltk', 'gensim', 'textblob', 'numpy', 'googletrans'],
+      install_requires=['nltk', 'gensim>=4.0', 'textblob', 'numpy', 'googletrans>=2'],
       classifiers=[
           "Intended Audience :: Developers",
           "Natural Language :: English",

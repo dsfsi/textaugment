@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # TextAugment: mixup
 #
-# Copyright (C) 2018-2020
+# Copyright (C) 2018-2023
 # Authors: Joseph Sefara, Vukosi Marivate
 #
 # URL: <https://github.com/dsfsi/textaugment/>
