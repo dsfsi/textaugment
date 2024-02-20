@@ -8,7 +8,6 @@
 
 from .constants import LANGUAGES
 from textblob import TextBlob
-from textblob.translate import NotTranslated
 from googletrans import Translator
 
 
@@ -132,16 +131,12 @@ class Translate:
         if type(data) is not str:
             raise TypeError("DataType must be a string")
         data = TextBlob(data.lower())
-        try:
-            data = data.translate(from_lang=self.src, to=self.to)
-            data = data.translate(from_lang=self.to, to=self.src)
-        except NotTranslated:
-            try:  # Switch to googletrans to do translation.
-                translator = Translator()
-                data = translator.translate(data, dest=self.to, src=self.src).text
-                data = translator.translate(data, dest=self.src, src=self.to).text
-            except Exception:
-                print("Error Not translated.\n")
-                raise
+        try:  # Switch to googletrans to do translation.
+            translator = Translator()
+            data = translator.translate(data, dest=self.to, src=self.src).text
+            data = translator.translate(data, dest=self.src, src=self.to).text
+        except Exception:
+            print("Error Not translated.\n")
+            raise
 
         return str(data).lower()
