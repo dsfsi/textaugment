@@ -4,9 +4,24 @@
 
 [![licence](https://img.shields.io/github/license/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/blob/master/LICENCE) [![GitHub release](https://img.shields.io/github/release/dsfsi/textaugment.svg?maxAge=3600)](https://github.com/dsfsi/textaugment/releases) [![Wheel](https://img.shields.io/pypi/wheel/textaugment.svg?maxAge=3600)](https://pypi.python.org/pypi/textaugment) [![python](https://img.shields.io/pypi/pyversions/textaugment.svg?maxAge=3600)](https://pypi.org/project/textaugment/) [![TotalDownloads](https://pepy.tech/badge/textaugment)](https://pypi.org/project/textaugment/) [![Downloads](https://static.pepy.tech/badge/textaugment/month)](https://pypi.org/project/textaugment/) [![LNCS](https://img.shields.io/badge/LNCS-Book%20Chapter-B31B1B.svg)](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21) [![arxiv](https://img.shields.io/badge/cs.CL-arXiv%3A1907.03752-B31B1B.svg)](https://arxiv.org/abs/1907.03752)
 
+
 ## You have just found TextAugment.
 
-TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
+TextAugment is a Python 3 library for augmenting text for natural language processing applications. TextAugment stands on the giant shoulders of [NLTK](https://www.nltk.org/), [Gensim v3.x](https://radimrehurek.com/gensim/), and [TextBlob](https://textblob.readthedocs.io/) and plays nicely with them.
+
+## Acknowledgements
+Cite this [paper](https://link.springer.com/chapter/10.1007%2F978-3-030-57321-8_21) when using this library. [Arxiv Version](https://arxiv.org/abs/1907.03752)
+
+```
+@inproceedings{marivate2020improving,
+  title={Improving short text classification through global augmentation methods},
+  author={Marivate, Vukosi and Sefara, Tshephisho},
+  booktitle={International Cross-Domain Conference for Machine Learning and Knowledge Extraction},
+  pages={385--399},
+  year={2020},
+  organization={Springer}
+}
+```
 
 # Table of Contents
 
@@ -19,6 +34,7 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 		- [WordNet-based augmentation](#WordNet-based-augmentation)
 		- [RTT-based augmentation](#RTT-based-augmentation)
 - [Easy data augmentation (EDA)](#eda-easy-data-augmentation-techniques-for-boosting-performance-on-text-classification-tasks)
+- [An easier data augmentation (AEDA)](#aeda-an-easier-data-augmentation-technique-for-text-classification)
 - [Mixup augmentation](#mixup-augmentation)
   - [Implementation](#Implementation)
 - [Acknowledgements](#Acknowledgements)
@@ -42,10 +58,14 @@ TextAugment is a Python 3 library for augmenting text for natural language proce
 
 * Python 3
 
-The following software packages are dependencies and will be installed automatically.
+The library installs its core dependencies automatically. Optional extras can be
+installed for additional augmenters.
 
 ```shell
-$ pip install numpy nltk gensim textblob googletrans 
+$ pip install numpy nltk textblob
+# Install extras
+$ pip install 'textaugment[word2vec]'    # requires gensim
+$ pip install 'textaugment[translate]'   # requires googletrans
 
 ```
 The following code downloads NLTK corpus for [wordnet](http://www.nltk.org/howto/wordnet.html).
@@ -63,7 +83,7 @@ nltk.download('averaged_perceptron_tagger')
 Use gensim to load a pre-trained word2vec model. Like [Google News from Google drive](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit).
 ```python
 import gensim
-model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
+model = gensim.models.KeyedVectors.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
 ```
 You can also use gensim to load Facebook's Fasttext [English](https://fasttext.cc/docs/en/english-vectors.html) and [Multilingual models](https://fasttext.cc/docs/en/crawl-vectors.html)
 ```
@@ -102,6 +122,11 @@ There are three types of augmentations which can be used:
 ```python
 from textaugment import Word2vec
 ```
+- fasttext 
+
+```python
+from textaugment import Fasttext
+```
 
 - wordnet 
 ```python
@@ -111,15 +136,18 @@ from textaugment import Wordnet
 ```python
 from textaugment import Translate
 ```
-#### Word2vec-based augmentation
+#### Fasttext/Word2vec-based augmentation
 
 [See this notebook for an example](https://github.com/dsfsi/textaugment/blob/master/examples/word2vec_example.ipynb)
 
 **Basic example**
 
 ```python
->>> from textaugment import Word2vec
+>>> from textaugment import Word2vec, Fasttext
 >>> t = Word2vec(model='path/to/gensim/model'or 'gensim model itself')
+>>> t.augment('The stories are good')
+The films are good
+>>> t = Fasttext(model='path/to/gensim/model'or 'gensim model itself')
 >>> t.augment('The stories are good')
 The films are good
 ```
@@ -130,8 +158,11 @@ The films are good
 >>> v = False # verbose mode to replace all the words. If enabled runs is not effective. Used in this paper (https://www.cs.cmu.edu/~diyiy/docs/emnlp_wang_2015.pdf)
 >>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Used by Geometric distribution to selects words from a sentence.
 
->>> t = Word2vec(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
->>> t.augment('The stories are good')
+>>> word = Word2vec(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
+>>> word.augment('The stories are good', top_n=10)
+The movies are excellent
+>>> fast = Fasttext(model='path/to/gensim/model'or'gensim model itself', runs=5, v=False, p=0.5)
+>>> fast.augment('The stories are good', top_n=10)
 The movies are excellent
 ```
 #### WordNet-based augmentation
@@ -154,7 +185,7 @@ In the afternoon, John is walking to town
 >>> p = 0.5 # The probability of success of an individual trial. (0.1<p<1.0), default is 0.5. Used by Geometric distribution to selects words from a sentence.
 
 >>> t = Wordnet(v=False ,n=True, p=0.5)
->>> t.augment('In the afternoon, John is going to town')
+>>> t.augment('In the afternoon, John is going to town', top_n=10)
 In the afternoon, Joseph is going to town.
 ```
 #### RTT-based augmentation
@@ -182,7 +213,7 @@ one of its synonyms chosen at random.
 ```python
 >>> from textaugment import EDA
 >>> t = EDA()
->>> t.synonym_replacement("John is going to town")
+>>> t.synonym_replacement("John is going to town", top_n=10)
 John is give out to town
 ```
 
@@ -217,6 +248,25 @@ Find a random synonym of a random word in the sentence that is not a stop word. 
 >>> t = EDA()
 >>> t.random_insertion("John is going to town")
 John is going to make up town
+```
+
+# AEDA: An easier data augmentation technique for text classification
+
+This is the implementation of AEDA by Karimi et al, a variant of EDA. It is based on the random insertion of punctuation marks.
+
+https://aclanthology.org/2021.findings-emnlp.234.pdf
+
+## Implementation
+[See this notebook for an example](https://github.com/dsfsi/textaugment/blob/master/examples/eda_example.ipynb)
+
+#### Random Insertion of Punctuation Marks
+
+**Basic example**
+```python
+>>> from textaugment import AEDA
+>>> t = AEDA()
+>>> t.punct_insertion("John is going to town")
+! John is going to town
 ```
 
 # Mixup augmentation

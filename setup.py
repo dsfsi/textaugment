@@ -31,25 +31,36 @@ def read(fname):
 
 
 setuptools.setup(
-      name='textaugment',
-      version=__version__,
-      packages=setuptools.find_packages(exclude=('test*', )),
-      author='Joseph Sefara',
-      author_email='sefaratj@gmail.com',
-      license='MIT',
-      keywords=['text augmentation', 'python', 'natural language processing', 'nlp'],
-      url='https://github.com/dsfsi/textaugment',
-      description='A library for augmenting text for natural language processing applications.',
-      long_description=read("README.md"),
-      long_description_content_type="text/markdown",
-      install_requires=['nltk', 'gensim', 'textblob', 'numpy', 'googletrans'],
-      classifiers=[
-          "Intended Audience :: Developers",
-          "Natural Language :: English",
-          "License :: OSI Approved :: MIT License",
-          "Operating System :: OS Independent",
-          "Programming Language :: Python :: 3",
-          "Programming Language :: Python :: Implementation :: PyPy",
-          "Topic :: Text Processing :: Linguistic",
-        ]
+    name='textaugment',
+    version=__version__,
+    packages=setuptools.find_packages(exclude=('test*', )),
+    author='Joseph Sefara',
+    author_email='sefaratj@gmail.com',
+    license='MIT',
+    keywords=['text augmentation', 'python', 'natural language processing', 'nlp'],
+    url='https://github.com/dsfsi/textaugment',
+    description='A library for augmenting text for natural language processing applications.',
+    long_description=read("README.md"),
+    long_description_content_type="text/markdown",
+    install_requires=[
+        'gensim>=4.0',
+        'googletrans>=4.0',
+        'nltk>=3',
+        'numpy>=1'
+    ],
+    classifiers=[
+        "Intended Audience :: Developers",
+        "Natural Language :: English",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: Implementation :: PyPy",
+        "Topic :: Text Processing :: Linguistic",
+    ]
+#    extras_require={               # For V4
+#          'word2vec': ['gensim>=4.0'],
+#          'translate': ['googletrans>=4.0.2'],
+#          'all': ['gensim>=4.0', 'googletrans>=4.0.2']
+#      },
 )
+

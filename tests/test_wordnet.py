@@ -2,10 +2,15 @@ import unittest
 import sys
 import numpy as np
 from textaugment.wordnet import Wordnet
+import nltk
 
 
 class InputTestCase(unittest.TestCase):
     def setUp(self):
+        nltk.download('punkt', quiet=True)
+        nltk.download('averaged_perceptron_tagger', quiet=True)
+        nltk.download('averaged_perceptron_tagger_eng', quiet=True)
+        nltk.download('wordnet', quiet=True)
         self.p = 0.8
         self.data = ["I", "am", "testing"]
         self.w = Wordnet(p=self.p)
@@ -31,6 +36,10 @@ class InputTestCase(unittest.TestCase):
 class OutputTestCase(unittest.TestCase):
 
     def setUp(self):
+        nltk.download('punkt', quiet=True)
+        nltk.download('averaged_perceptron_tagger', quiet=True)
+        nltk.download('averaged_perceptron_tagger_eng', quiet=True)
+        nltk.download('wordnet', quiet=True)
         self.p = 0.8
         self.data = ["I", "am", "testing"]
         self.data2 = "известен още с псевдонимите"

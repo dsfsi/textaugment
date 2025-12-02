@@ -1,21 +1,24 @@
 import unittest
 import sys
 from textaugment.word2vec import Word2vec
+from gensim.test.utils import common_texts
+from gensim.models import Word2Vec
 
 
 class InputTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.path = "/home/tjs/dev/papu/models/gensim_cbow_sepedi"
-        self.wrongpath = "/home/tjs/dev/papu/models/gensim_cbow_sepedi-wrong"
-        self.w = Word2vec(model=self.path)
+        # create a tiny model for testing
+        self.model = Word2Vec(common_texts, vector_size=20, min_count=1)
+        self.wrongpath = "/tmp/non_existent_model"
+        self.w = Word2vec(model=self.model)
 
     def test_augment(self):
         with self.assertRaises(TypeError, msg="Value for p should be float"):
-            Word2vec(model=self.path, p="foo")
+            Word2vec(model=self.model, p="foo")
 
         with self.assertRaises(TypeError, msg="Value for runs should be integer"):
-            Word2vec(model=self.path, runs="foo")
+            Word2vec(model=self.model, runs="foo")
 
         with self.assertRaises(FileNotFoundError, msg="The model is not found"):
             Word2vec(model=self.wrongpath)
@@ -30,8 +33,8 @@ class InputTestCase(unittest.TestCase):
 class OutputTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.path = "/home/tjs/dev/papu/models/gensim_cbow_sepedi"
-        self.w = Word2vec(model=self.path)
+        self.model = Word2Vec(common_texts, vector_size=20, min_count=1)
+        self.w = Word2vec(model=self.model)
         self.data = "We are testing"
 
     def test_augment(self):
