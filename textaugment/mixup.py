@@ -76,10 +76,11 @@ class MIXUP:
             index = np.random.permutation(batch_size)
             mixed_x = (x.T * lam_vector).T + (x[index, :].T * (1.0 - lam_vector)).T
             output_x.append(mixed_x)
-            if y is None:
-                return np.concatenate(output_x, axis=0)
-            mixed_y = (y.T * lam_vector).T + (y[index].T * (1.0 - lam_vector)).T
-            output_y.append(mixed_y)
+            if y is not None:
+                mixed_y = (y.T * lam_vector).T + (y[index].T * (1.0 - lam_vector)).T
+                output_y.append(mixed_y)
+        if len(output_y) == 0:
+            return np.concatenate(output_x, axis=0)
         return np.concatenate(output_x, axis=0), np.concatenate(output_y, axis=0)
 
     def flow(self, data, labels=None, batch_size=32, shuffle=True, runs=1):
