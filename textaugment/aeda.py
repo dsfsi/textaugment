@@ -68,7 +68,8 @@ class AEDA:
         len_sentence = len(sentence)
         # Get random number of punctuations to be inserted
         # The number of punctuations to be inserted is between 1 and 1/3 of the length of the sentence
-        num_punctuations = random.randint(1, len_sentence // 3)
+        # For one- and two-word sentences the upper bound is 0, so keep the minimum of one
+        num_punctuations = random.randint(1, max(1, len_sentence // 3))
         augmented_sentence = sentence.copy()
 
         # Insert random punctuations in random positions
