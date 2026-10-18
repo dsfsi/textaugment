@@ -28,8 +28,8 @@ class MIXUP:
                 kwargs['data'] = np.array(kwargs['data'])
             if not isinstance(kwargs['data'], np.ndarray):
                 raise TypeError("data must be numpy array. Found " + str(type(kwargs['data'])))
-        if 'labels' in kwargs:
-            if isinstance(kwargs['labels'], (list, type(None))):
+        if 'labels' in kwargs and kwargs['labels'] is not None:
+            if isinstance(kwargs['labels'], list):
                 kwargs['labels'] = np.array(kwargs['labels'])
             if not isinstance(kwargs['labels'], np.ndarray):
                 raise TypeError("labels must be numpy array. Found " + str(type(kwargs['labels'])))
@@ -42,6 +42,8 @@ class MIXUP:
         if 'runs' in kwargs:
             if not isinstance(kwargs['runs'], int):
                 raise TypeError("runs must be a valid integer. Found " + str(type(kwargs['runs'])))
+
+        return kwargs
 
     def __init__(self, random_state=1, runs=1):
         self.random_state = random_state
@@ -94,7 +96,9 @@ class MIXUP:
         :rtype:   array or tuple
         :return:  array or tuple of arrays (X_data array, labels array)."""
 
-        self.validate(data=data, labels=labels, batch_size=batch_size, shuffle=shuffle, runs=runs)
+        params = self.validate(data=data, labels=labels, batch_size=batch_size, shuffle=shuffle, runs=runs)
+        data = params['data']
+        labels = params['labels']
 
         self.runs = runs
 
